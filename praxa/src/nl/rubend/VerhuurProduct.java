@@ -25,6 +25,7 @@ public class VerhuurProduct extends Product {
 				exemplaren.add(Exemplaar);
 			}
 		}
+
 		return exemplaren;
 	}
 }

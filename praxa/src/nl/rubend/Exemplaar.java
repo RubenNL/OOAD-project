@@ -23,6 +23,7 @@ public class Exemplaar {
 		} else if (status.equals("") || status.equals(null)) {
 				System.out.println("Status niet beschikbaar");
 		}
+
 		return verhuurd;
 	}
 }
