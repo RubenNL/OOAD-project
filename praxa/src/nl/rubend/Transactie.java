@@ -1,6 +1,7 @@
 package nl.rubend;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Transactie {
@@ -11,4 +12,5 @@ public class Transactie {
 	private double totaal;
 	private double btwTotaal;
 	private String transactieType;
+	private ArrayList<TransactieRegel> regels;
 }
