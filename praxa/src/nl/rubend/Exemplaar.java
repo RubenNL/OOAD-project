@@ -20,7 +20,7 @@ public class Exemplaar {
 			verhuurd = true;
 		} else if (status.equals("Beschikbaar")){
 			verhuurd = false;
-		} else if (status.equals("") || status.equals(null)) {
+		} else if (status.equals(null) || status.equals("")) {
 				System.out.println("Status niet beschikbaar");
 		}
 
