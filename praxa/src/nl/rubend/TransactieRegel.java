@@ -10,4 +10,5 @@ public class TransactieRegel {
 	    this.transactie = tr;
     }
 
+
 }

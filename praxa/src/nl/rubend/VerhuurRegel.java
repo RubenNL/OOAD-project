@@ -4,6 +4,11 @@ import java.util.Date;
 
 public class VerhuurRegel extends TransactieRegel {
 	private Date eindDatum;
-	private Date aantalDagen;
+	private int aantalDagen;
 	private Exemplaar exemplaar;
+
+	public Date geefDatum() {
+		return eindDatum;
+	}
+
 }
