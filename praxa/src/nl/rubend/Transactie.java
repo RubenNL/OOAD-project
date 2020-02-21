@@ -12,5 +12,5 @@ public class Transactie {
 	private double totaal;
 	private double btwTotaal;
 	private String transactieType;
-	private ArrayList<TransactieRegel> regels;
+	private ArrayList<TransactieRegel> regels = new ArrayList<TransactieRegel>();
 }
