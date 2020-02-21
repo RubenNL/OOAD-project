@@ -1,7 +1,7 @@
 package nl.rubend;
 
 public class VerhuurTransactie {
-    private double borgTotaal;
-    private double afrekenTotaal;
+	private double borgTotaal;
+	private double afrekenTotaal;
 
 }
