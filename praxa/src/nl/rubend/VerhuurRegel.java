@@ -7,8 +7,6 @@ public class VerhuurRegel extends TransactieRegel {
 	private int aantalDagen;
 	private Exemplaar exemplaar;
 
-
-	//moet nog gecheckt worden
 	public Date geefDatum() {
 		return eindDatum;
 	}
