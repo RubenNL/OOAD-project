@@ -1,0 +1,8 @@
+Inleveren opdracht1:
+	Wat moeten we presenteren?
+	Hoe lang moet de presentatie zijn?
+	Wanneer is/zijn de presentaties?
+	Wat zijn de eisen van de presentatie?
+Inleveren opdracht2:
+	Moet opdracht 2 ook gepresenteerd worden?
+	waar kunnen we de use cases "overzicht vluchten" en "gereedschap verhuren" downloaden?
