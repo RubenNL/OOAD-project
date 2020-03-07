@@ -1,18 +1,28 @@
 package nl.rubend;
 
-import java.util.Date;
 
 public class VerhuurRegel extends TransactieRegel {
-	private Date eindDatum;
+	private String eindDatum;
 	private int aantalDagen;
-	private Exemplaar exemplaar;
 
-	VerhuurRegel(Transactie tr) {
-		super(tr);
+	public VerhuurRegel(int aantal, double regTot) {
+		super(aantal, regTot);
 	}
 
-	public Date geefDatum() {
-		return eindDatum;
+	public String geefDatum() {
+		return this.eindDatum;
 	}
 
+	public int getAantalDagen() {
+		return this.aantalDagen;
+	}
+
+
+	public void setEindDatum(String edt) {
+		this.eindDatum = edt;
+	}
+
+	public void setAantalDagen(int ad) {
+		this.aantalDagen = ad;
+	}
 }

@@ -1,8 +1,23 @@
 package nl.rubend;
 
+/*
+TO-DO :
+
+1- functionaliteit (ofwel zorgen dat alle functies die we nodig hebben/staan in de sequencediagram gecodeerd zijn)
+2- eventueel interfaces?
+3- testen en controleren van alle relaties
+4- klasseparameters even checken ook
+
+Als laatste:
+5- GUI aanmaken m.b.v. Javafx
+ */
+
+
+
+
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
     }
 }

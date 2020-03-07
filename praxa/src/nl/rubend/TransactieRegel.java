@@ -1,14 +1,19 @@
 package nl.rubend;
 
+import java.util.ArrayList;
+
 public class TransactieRegel {
 	private int aantal;
 	private double regelTotaal;
-	private Product product;
-	private Transactie transactie;
 
-	TransactieRegel(Transactie tr) {
-	    this.transactie = tr;
-    }
+//	eventueel implementeren?
+//	private Product product;
+//	private Transactie transactie
+
+	public TransactieRegel(int aantal, double regTot) {
+		this.aantal = aantal;
+		this.regelTotaal = regTot;
+	}
 
 
 }
