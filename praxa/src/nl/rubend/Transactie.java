@@ -2,10 +2,11 @@ package nl.rubend;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Transactie {
 	private int transactienr;
-	private String datum;
+	private Date datum;
 	private String tijd;
 	private String plaats;
 //	private double totaal;                     // een afgeleide attribuut
@@ -17,8 +18,11 @@ public class Transactie {
 	private ArrayList<TransactieRegel> regels = new ArrayList<TransactieRegel>();
 
 //	de constructor moet waarschijnlijk nog aangepast wordern
-	public Transactie(int trNr) {
+	public Transactie(int trNr, String transactieType, Date datum, String tijd, String plaats) {
 		this.transactienr = trNr;
+		this.tijd=tijd;
+		this.datum=datum;
+		this.plaats=plaats;
 	}
 
 	// de realisatie van de compositie relatie
@@ -31,25 +35,11 @@ public class Transactie {
 		this.btwTotaal = btwTotaal;
 	}
 
-	public void setTijd(String td) {
-		this.tijd = td;
-	}
-
-	public void setDatum(String dt) {
-		this.datum = dt;
-	}
-
-	public void setPlaats(String plaats) {
-		this.plaats = plaats;
-	}
-
-
-
 	public void setTransactieType(String transactieType) {
 		this.transactieType = transactieType;
 	}
 
-	public String geefDatum() {
+	public Date geefDatum() {
 		return this.datum;
 	}
 

@@ -31,10 +31,8 @@ public class Product {
 		return transactieregels;
 	}
 
-
-	public void setTransactieregels(ArrayList<TransactieRegel> trRegels) {
-		this.transactieregels = trRegels;
+	public void addTransactieRegel(TransactieRegel transactieRegel) {
+		this.transactieregels.add(transactieRegel);
 	}
-
 
 }
