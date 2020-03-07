@@ -1,16 +1,18 @@
 package nl.rubend;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Exemplaar {
 	private String serieNr;
-	private String aanschafDatum;
+	private Date aanschafDatum;
 	private String status;
 	private ArrayList<VerhuurRegel> regels=new ArrayList<VerhuurRegel>();
 
 
-	public Exemplaar(String serieNr){
+	public Exemplaar(String serieNr, Date aanschafDatum){
 		this.serieNr = serieNr;
+		this.aanschafDatum = aanschafDatum;
 	}
 
 
