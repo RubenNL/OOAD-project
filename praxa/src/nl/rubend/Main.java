@@ -8,8 +8,6 @@ TO-DO :
 3- testen en controleren van alle relaties
 4- klasseparameters even checken ook
 
-Als laatste:
-5- GUI aanmaken m.b.v. Javafx
  */
 
 
