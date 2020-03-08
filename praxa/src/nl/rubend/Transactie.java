@@ -26,8 +26,8 @@ public class Transactie {
 	}
 
 	// de realisatie van de compositie relatie
-	public void addTransactieRegel(int aantal, double regTot) {
-		regels.add( new TransactieRegel(aantal, regTot));
+	public void addTransactieRegel(int aantal, Product product) {
+		regels.add( new TransactieRegel(aantal, product));
 	}
 
 

@@ -7,8 +7,8 @@ public class VerhuurRegel extends TransactieRegel {
 	private Date eindDatum;
 	private int aantalDagen;
 
-	public VerhuurRegel(int aantal, double regTot,Date eindDatum) {
-		super(aantal, regTot);
+	public VerhuurRegel(int aantal, Product product,Date eindDatum) {
+		super(aantal, product);
 		this.eindDatum=eindDatum;
 	}
 
