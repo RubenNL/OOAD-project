@@ -26,14 +26,13 @@ public class VerhuurProduct extends Product {
 	public ArrayList geefBeschikbareExemplaren(){
 		ArrayList<Exemplaar> beschikbaar=new ArrayList<Exemplaar>();
 		for(Exemplaar Exemplaar: exemplaren) {
-			if (Exemplaar.beschikbaar() == false) {
-				beschikbaar.add(Exemplaar);
-			}
+			if (Exemplaar.beschikbaar()) beschikbaar.add(Exemplaar);
 		}
 		return beschikbaar;
 	}
 
 	// 	Moet getest worden
+	//	Mist exemplaren vergelijken
 	public boolean equals(Object other) {
 		boolean gelijkeObjecten = false;
 		if (other instanceof VerhuurProduct) {
