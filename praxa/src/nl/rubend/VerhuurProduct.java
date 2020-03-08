@@ -20,20 +20,17 @@ public class VerhuurProduct extends Product {
 	}
 
 	public static ArrayList geefAlle(){
-		for (VerhuurProduct VerhuurProduct : alleVerhuurProducten) {
-			alleVerhuurProducten.add(VerhuurProduct);
-		}
 		return alleVerhuurProducten;
 	}
 
 	public ArrayList geefBeschikbareExemplaren(){
+		ArrayList<Exemplaar> beschikbaar=new ArrayList<Exemplaar>();
 		for(Exemplaar Exemplaar: exemplaren) {
-			if (Exemplaar.isVerhuurd() == false) {
-				this.exemplaren.add(Exemplaar);
+			if (Exemplaar.beschikbaar() == false) {
+				beschikbaar.add(Exemplaar);
 			}
 		}
-
-		return exemplaren;
+		return beschikbaar;
 	}
 
 	// 	Moet getest worden
@@ -51,9 +48,7 @@ public class VerhuurProduct extends Product {
 		return exemplaren;
 	}
 
-	public void setExemplaren(ArrayList<Exemplaar> exmplRn) {
-		this.exemplaren = exmplRn;
+	public void addExemplaar(Exemplaar exemplaar) {
+		this.exemplaren.add(exemplaar);
 	}
-
-
 }
