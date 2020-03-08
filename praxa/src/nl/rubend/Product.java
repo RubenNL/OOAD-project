@@ -19,7 +19,9 @@ public class Product {
 		this.prijs = prs;
 	}
 
-
+	public double getPrijs() {
+		return this.prijs;
+	}
 	public boolean equals(Object other) {
 		if (other instanceof  Product) {
 			return productNr == ((Product) other).productNr;
