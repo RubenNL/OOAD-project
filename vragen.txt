@@ -6,3 +6,5 @@ Inleveren opdracht1:
 Inleveren opdracht2:
 	Moet opdracht 2 ook gepresenteerd worden?
 	waar kunnen we de use cases "overzicht vluchten" en "gereedschap verhuren" downloaden?
+	waar kunnen we de code van controller-klasse OverzVluchtFrame.java downloaden? dit staat niet in het ZIP bestand die we hebben ontvangen.
+
