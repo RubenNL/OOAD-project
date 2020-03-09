@@ -23,6 +23,7 @@ public class VerhuurProduct extends Product {
 		return alleVerhuurProducten;
 	}
 
+	// Geeft een lijst met beschikbare exemplaren terug
 	public ArrayList geefBeschikbareExemplaren(){
 		ArrayList<Exemplaar> beschikbaar=new ArrayList<Exemplaar>();
 		for(Exemplaar Exemplaar: exemplaren) {
