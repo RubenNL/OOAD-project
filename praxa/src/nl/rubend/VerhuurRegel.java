@@ -1,21 +1,18 @@
 package nl.rubend;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class VerhuurRegel extends TransactieRegel {
 	private Date eindDatum;
-	private Date startDatum;
-
-	public VerhuurRegel(int aantal, Product product,Date eindDatum) {
-			super(aantal, product);
-			this.startDatum=startDatum;
-			this.eindDatum=eindDatum;
-		}
-	public int getAantalDagen() {
-		long diff = eindDatum.getTime() - startDatum.getTime();
-		return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+	private int aantalDagen;
+	private Exemplaar exemplaar;
+	public VerhuurRegel(Product product, int aantalDagen, Date eindDatum) {
+		super(1, product);
+		this.aantalDagen=aantalDagen;
+		this.eindDatum=eindDatum;
 	}
 	public Date geefDatum() {
 		return this.eindDatum;
