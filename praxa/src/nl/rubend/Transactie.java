@@ -24,7 +24,11 @@ public class Transactie {
 		this.datum=datum;
 		this.plaats=plaats;
 	}
-
+	public Transactie(String transactieType, Date datum, String tijd, String plaats) {
+		this.tijd=tijd;
+		this.datum=datum;
+		this.plaats=plaats;
+	}
 	// de realisatie van de compositie relatie
 	public void addTransactieRegel(int aantal, Product product) {
 		regels.add( new TransactieRegel(aantal, product));
