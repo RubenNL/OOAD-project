@@ -19,8 +19,12 @@ public class VerhuurProduct extends Product {
 		}
 	}
 
-	public static ArrayList geefAlle(){
-		return alleVerhuurProducten;
+	public static ArrayList geefAlle() {
+		ArrayList<String> omschrijvingen=new ArrayList<String>();
+		for(Product product:alleVerhuurProducten) {
+			omschrijvingen.add(product.getOmschrijving());
+		}
+		return omschrijvingen;
 	}
 
 	public ArrayList geefBeschikbareExemplaren(){

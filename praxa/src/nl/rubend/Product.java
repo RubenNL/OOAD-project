@@ -18,7 +18,9 @@ public class Product {
 		this.omschrijving = omschr;
 		this.prijs = prs;
 	}
-
+	public String getOmschrijving() {
+		return this.omschrijving;
+	}
 	public double getPrijs() {
 		return this.prijs;
 	}
