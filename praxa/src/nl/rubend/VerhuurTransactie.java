@@ -17,7 +17,7 @@ public class VerhuurTransactie extends Transactie {
 		super("verhuur", datum, tijd, plaats);
 		this.borgTotaal=0;
 	}
-	public void voegVerhuurRegelToe(VerhuurRegel verhuurRegel) {
-		verhuurRegels.add(new verhuurRegel());
+	public void voegVerhuurRegelToe(Product product, int aantalDagen, Date eindDatum) {
+		verhuurRegels.add(new VerhuurRegel(product, aantalDagen, eindDatum));
 	}
 }

@@ -14,6 +14,10 @@ public class TransactieRegel {
 		this.product=product;
 		this.aantal = aantal;
 	}
+	public TransactieRegel(Product product) {
+		this.product=product;
+		this.aantal = 0;	
+	}
 	public double getRegelTotaal() {
 		return product.getPrijs() * aantal;
 	}
