@@ -9,9 +9,11 @@ public class VerhuurTransactie extends Transactie {
 //	private double afrekenTotaal;
 
 	public VerhuurTransactie(int trNr, double brgTt, Date datum, String tijd, String plaats) {
-		super(trNr, "verhuur", datum, tijd,plaats);
+		super("verhuur", datum, tijd, plaats);
 		this.borgTotaal = brgTt;
 	}
-
-
+	public VerhuurTransactie(Date datum, String tijd, String plaats) {
+		super("verhuur", datum, tijd, plaats);
+		this.borgTotaal=0;
+	}
 }
