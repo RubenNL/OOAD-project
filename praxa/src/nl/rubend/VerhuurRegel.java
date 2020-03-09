@@ -13,7 +13,7 @@ public class VerhuurRegel extends TransactieRegel {
 			this.startDatum=startDatum;
 			this.eindDatum=eindDatum;
 		}
-		public int getAantalDagen() {
+	public int getAantalDagen() {
 		long diff = eindDatum.getTime() - startDatum.getTime();
 		return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
