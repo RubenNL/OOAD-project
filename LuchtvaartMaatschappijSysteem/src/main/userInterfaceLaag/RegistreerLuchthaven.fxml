@@ -31,12 +31,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="215.0">
                <children>
-                  <TextField fx:id="naamTextField" alignment="CENTER_RIGHT" onKeyTyped="#naam">
+                  <TextField fx:id="landCodeTextField" alignment="CENTER_RIGHT" editable="false">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Label text="Naam">
+                  <Label text="Code">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -71,12 +71,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="215.0">
                <children>
-                  <TextField fx:id="landCodeTextField" alignment="CENTER_RIGHT">
+                  <TextField fx:id="naamTextField" alignment="CENTER_RIGHT" onKeyTyped="#naam">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <Label text="Code">
+                  <Label text="Naam">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -87,5 +87,19 @@
       </HBox>
       <Button fx:id="buttonOK" layoutX="307.0" layoutY="274.0" mnemonicParsing="false" onAction="#ok" prefHeight="30.0" prefWidth="70.0" text="OK" />
       <Button fx:id="buttonCancel" layoutX="390.0" layoutY="274.0" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="70.0" text="Cancel" />
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="90.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="215.0">
+         <children>
+            <TextField fx:id="codeTextField" alignment="CENTER_RIGHT" onKeyTyped="#code">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Label text="Code">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
