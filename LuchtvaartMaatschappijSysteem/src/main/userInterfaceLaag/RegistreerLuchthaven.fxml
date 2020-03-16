@@ -31,7 +31,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="41.0" prefWidth="215.0">
                <children>
-                  <TextField fx:id="naamTextField" alignment="CENTER_RIGHT">
+                  <TextField fx:id="naamTextField" alignment="CENTER_RIGHT" onKeyTyped="#naam">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
