@@ -1,5 +1,6 @@
 package main.userInterfaceLaag;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -40,7 +41,7 @@ public class RegistreerLuchthavenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-/**     Activeer na het maken van het scherm
+        //Activeer na het maken van het scherm
         alleLanden = Land.geefAlleLanden();
         nieuweLuchthaven = new Luchthaven();
 
@@ -53,12 +54,14 @@ public class RegistreerLuchthavenController implements Initializable {
         for (Iterator<String> i = landNamen.iterator(); i.hasNext();) {
             landComboBox.getItems().add(i.next());
         }
+        /*
         // Voeg event listener toe aan naam- en codeTextField.
         naamTextField.focusedProperty().addListener((obs, oldText, newText) -> {
             if(!newText) naam();}); // if (focus lost)
         codeTextField.focusedProperty().addListener((obs, oldText, newText) -> {
             if(!newText) code();});
- */
+         */
+
     }
 
     public void landNaam() {
@@ -134,6 +137,10 @@ public class RegistreerLuchthavenController implements Initializable {
 
     private void toonMelding(String tekstMessage) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setResizable(true);
+        alert.onShownProperty().addListener(e -> {
+            Platform.runLater(() -> alert.setResizable(false));
+        });
         alert.setTitle("Waarschuwing!");
         alert.setContentText(tekstMessage);
         alert.showAndWait();
