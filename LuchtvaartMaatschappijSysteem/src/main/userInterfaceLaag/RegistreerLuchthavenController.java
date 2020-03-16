@@ -121,6 +121,7 @@ public class RegistreerLuchthavenController implements Initializable {
     }
 
     public void ok() {
+        naam();
         try {
             nieuweLuchthaven.bewaar();
             Stage stage = (Stage) buttonOK.getScene().getWindow();
