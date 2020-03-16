@@ -1,10 +1,12 @@
 package main.userInterfaceLaag;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.domeinLaag.*;
+import javafx.collections.FXCollections;
 
 import java.net.URL;
 import java.util.*;
@@ -159,6 +161,10 @@ public class RegistreerVluchtController implements Initializable {
 
     private void toonMelding(String tekstMessage) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setResizable(true);
+        alert.onShownProperty().addListener(e -> {
+            Platform.runLater(() -> alert.setResizable(false));
+        });
         alert.setTitle("Waarschuwing!");
         alert.setContentText(tekstMessage);
         alert.showAndWait();
