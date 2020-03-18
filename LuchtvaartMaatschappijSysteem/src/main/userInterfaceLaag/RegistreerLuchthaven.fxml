@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -27,11 +28,14 @@
   </rowConstraints>
    <children>
       <Label alignment="CENTER" text="Land" />
-      <ComboBox fx:id="landComboBox" onAction="#landNaam" prefHeight="24.0" prefWidth="122.0" GridPane.columnIndex="1" />
-      <TextField fx:id="landCodeTextField" alignment="CENTER_RIGHT" editable="false" prefHeight="30.0" prefWidth="102.0" style="-fx-background-color: light gray; -fx-border-color: gray;" GridPane.columnIndex="2">
+      <ComboBox fx:id="landComboBox" onAction="#landNaam" GridPane.columnIndex="1" />
+      <TextField fx:id="landCodeTextField" alignment="CENTER_RIGHT" editable="false" style="-fx-background-color: light gray; -fx-border-color: gray;" GridPane.columnIndex="2">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
       </TextField>
       <Label text="Code" GridPane.rowIndex="1" />
       <TextField fx:id="codeTextField" alignment="CENTER_RIGHT" onKeyTyped="#code" prefHeight="31.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
