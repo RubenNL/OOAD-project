@@ -9,7 +9,9 @@ import main.domeinLaag.Boeking;
 import main.domeinLaag.Luchthaven;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class BoekVluchtController implements Initializable {
 
@@ -45,6 +47,9 @@ public class BoekVluchtController implements Initializable {
 	}
 	public void vertrek() {
 		System.out.println(vertrekVliegveld.getValue());
+	}
+	public void bestemming() {
+		System.out.println(aankomstVliegveld.getValue());
 	}
 	public void ok() {
 		try {

@@ -28,7 +28,7 @@
       <Label text="Vertrekpunt" />
       <ComboBox fx:id="vertrekVliegveld" onAction="#vertrek" prefHeight="26.0" prefWidth="172.0" GridPane.columnIndex="1" />
       <Label text="Bestemming" GridPane.rowIndex="1" />
-      <ComboBox fx:id="aankomstVliegveld" prefHeight="26.0" prefWidth="172.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ComboBox fx:id="aankomstVliegveld" onAction="#bestemming" prefHeight="26.0" prefWidth="172.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label text="Vertrek" GridPane.rowIndex="2" />
       <DatePicker fx:id="vertrekDatum" prefHeight="26.0" prefWidth="216.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <ComboBox fx:id="vertrekTijd" prefHeight="28.0" prefWidth="88.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
