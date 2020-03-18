@@ -1,10 +1,10 @@
 package main.userInterfaceLaag;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Spinner;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import main.domeinLaag.Boeking;
 import main.domeinLaag.Luchthaven;
 
@@ -31,11 +31,41 @@ public class BoekVluchtController implements Initializable {
 	@FXML
 	private Spinner stoelen;
 
+	@FXML
+	private Button buttonOK;
+
+	@FXML
+	private Button buttonCancel;
+
 	private Boeking boeking;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		boeking=new Boeking();
 		vertrekVliegveld.getItems().setAll(Luchthaven.geefAlle().keySet());
 	}
+	public void ok() {
+		try {
+			boeking.bewaar();
+			Stage stage = (Stage) buttonOK.getScene().getWindow();
+			stage.close();
+		} catch (IllegalStateException ei) {
+			toonMelding(ei.getMessage());
+		}
+	}
 
+	public void cancel() {
+		Stage stage = (Stage) buttonCancel.getScene().getWindow();
+		stage.close();
+	}
+
+	private void toonMelding(String tekstMessage) {
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setResizable(true);
+		alert.onShownProperty().addListener(e -> {
+			Platform.runLater(() -> alert.setResizable(false));
+		});
+		alert.setTitle("Waarschuwing!");
+		alert.setContentText(tekstMessage);
+		alert.showAndWait();
+	}
 }
