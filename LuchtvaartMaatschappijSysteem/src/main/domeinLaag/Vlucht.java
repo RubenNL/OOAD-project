@@ -12,8 +12,8 @@ public class Vlucht
    private Calendar vertrekTijd;
    private Calendar aankomstTijd;
    private Calendar duur;
-   
-   
+   private HashSet<Boeking> boekingen= new HashSet<Boeking>();
+
    public static TreeMap<Integer, Vlucht> geefAlle() {
 	   TreeMap<Integer, Vlucht> alleV = new TreeMap<Integer, Vlucht>();
 	   for (Vlucht v : alleVluchten) {
@@ -168,6 +168,9 @@ public class Vlucht
 				+ ", bestemming=" + bestemming + ", vertrekpunt=" + vertrekpunt
 				+ ", vertrekTijd=" + vertrekTijd + ", aankomstTijd="
 				+ aankomstTijd + ", duur=" + duur + "]";
+	}
+	public void addBoeking(Boeking boeking) {
+		this.boekingen.add(boeking);
 	}
 	
 }
