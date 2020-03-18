@@ -7,11 +7,15 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import main.domeinLaag.Boeking;
 import main.domeinLaag.Luchthaven;
+import main.domeinLaag.Vlucht;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
-public class BoekVluchtController implements Initializable {
+public class BoekVluchtController<Treemap> implements Initializable {
 
 	@FXML
 	private ComboBox<String> vertrekVliegveld;
@@ -38,14 +42,25 @@ public class BoekVluchtController implements Initializable {
 	private Button buttonCancel;
 
 	private Boeking boeking;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		boeking=new Boeking();
 		vertrekVliegveld.getItems().setAll(Luchthaven.geefAlle().keySet());
 	}
 	public void vertrek() {
-		System.out.println(vertrekVliegveld.getValue());
+		TreeMap<Integer, Vlucht> alleVluchten = Vlucht.geefAlle();
+		String vertrekLuchthaven = vertrekVliegveld.getValue();
+
+		for(Map.Entry<Integer,Vlucht> entry : alleVluchten.entrySet()) {
+			Integer key = entry.getKey();
+			Vlucht value = entry.getValue();
+
+			System.out.println(key + " => " + value);
+		}
+
 	}
+
 	public void ok() {
 		try {
 			boeking.bewaar();
