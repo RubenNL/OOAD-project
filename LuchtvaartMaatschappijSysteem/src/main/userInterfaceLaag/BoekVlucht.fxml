@@ -26,7 +26,7 @@
   </rowConstraints>
    <children>
       <Label text="Vertrekpunt" />
-      <ComboBox fx:id="vertrekVliegveld" prefHeight="26.0" prefWidth="172.0" GridPane.columnIndex="1" />
+      <ComboBox fx:id="vertrekVliegveld" onAction="#vertrek" prefHeight="26.0" prefWidth="172.0" GridPane.columnIndex="1" />
       <Label text="Bestemming" GridPane.rowIndex="1" />
       <ComboBox fx:id="aankomstVliegveld" prefHeight="26.0" prefWidth="172.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label text="Vertrek" GridPane.rowIndex="2" />
@@ -37,7 +37,7 @@
       <Label text="Aantal stoelen" GridPane.rowIndex="4" />
       <Spinner fx:id="stoelen" prefHeight="26.0" prefWidth="63.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="94.0" text="Annuleren" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Button fx:id="buttonOk" mnemonicParsing="false" onAction="#ok" prefHeight="35.0" prefWidth="94.0" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Button fx:id="buttonOK" mnemonicParsing="false" onAction="#ok" prefHeight="35.0" prefWidth="94.0" text="OK" GridPane.columnIndex="2" GridPane.rowIndex="5" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -43,6 +43,9 @@ public class BoekVluchtController implements Initializable {
 		boeking=new Boeking();
 		vertrekVliegveld.getItems().setAll(Luchthaven.geefAlle().keySet());
 	}
+	public void vertrek() {
+		System.out.println(vertrekVliegveld.getValue());
+	}
 	public void ok() {
 		try {
 			boeking.bewaar();
