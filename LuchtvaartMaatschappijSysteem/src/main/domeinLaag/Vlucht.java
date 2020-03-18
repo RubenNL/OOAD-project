@@ -169,6 +169,13 @@ public class Vlucht
 				+ ", vertrekTijd=" + vertrekTijd + ", aankomstTijd="
 				+ aankomstTijd + ", duur=" + duur + "]";
 	}
+	public Integer getBeschikbarePlaatsen() {
+   		Integer plaatsen=vliegtuig.geefCapaciteit();
+		for(Boeking boeking:boekingen) {
+			plaatsen-=boeking.getStoelen();
+		}
+		return plaatsen;
+	}
 	public void addBoeking(Boeking boeking) {
 		this.boekingen.add(boeking);
 	}

@@ -10,62 +10,74 @@ import main.domeinLaag.Luchthaven;
 import main.domeinLaag.Vlucht;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.TreeMap;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class BoekVluchtController<Treemap> implements Initializable {
-
 	@FXML
 	private ComboBox<String> vertrekVliegveld;
-
 	@FXML
-	private ComboBox<?> aankomstVliegveld;
-
+	private ComboBox<String> aankomstVliegveld;;
 	@FXML
-	private DatePicker vertrekDatum;
-
+	private ComboBox<String> vertrekTijd;
 	@FXML
-	private ComboBox<?> vertrekTijd;
-
-	@FXML
-	private ComboBox<?> klasse;
-
+	private ComboBox<String> klasse;
 	@FXML
 	private Spinner stoelen;
-
 	@FXML
 	private Button buttonOK;
-
 	@FXML
 	private Button buttonCancel;
-
 	private Boeking boeking;
-
+	private Luchthaven vertrekPunt;
+	private Luchthaven aankomstPunt;
+	private String vertrekTijdString;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		boeking=new Boeking();
 		vertrekVliegveld.getItems().setAll(Luchthaven.geefAlle().keySet());
 	}
 	public void vertrek() {
-		TreeMap<Integer, Vlucht> alleVluchten = Vlucht.geefAlle();
-		String vertrekLuchthaven = vertrekVliegveld.getValue();
-
-		for(Map.Entry<Integer,Vlucht> entry : alleVluchten.entrySet()) {
+		vertrekPunt=Luchthaven.geefAlle().get(vertrekVliegveld.getValue());
+		aankomstVliegveld.getItems().clear();
+		Set<String> aankomstSet = new HashSet<String>();
+		for(Map.Entry<Integer,Vlucht> entry : Vlucht.geefAlle().entrySet()) {
 			Integer key = entry.getKey();
 			Vlucht value = entry.getValue();
-
-			System.out.println(key + " => " + value);
+			if(vertrekPunt==value.getVertrekPunt()) {
+				aankomstSet.add(value.getBestemming().geefNaam());
+			}
 		}
-
+		aankomstVliegveld.getItems().setAll(aankomstSet);
 	}
-
+	private String dateFormatter(Calendar calendar) {
+		Date date = calendar.getTime();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+		return dateFormat.format(date);
+	}
 	public void bestemming() {
-		System.out.println(aankomstVliegveld.getValue());
+		aankomstPunt=Luchthaven.geefAlle().get(aankomstVliegveld.getValue());
+		for(Map.Entry<Integer,Vlucht> entry : Vlucht.geefAlle().entrySet()) {
+			Integer key = entry.getKey();
+			Vlucht value = entry.getValue();
+			if(vertrekPunt==value.getVertrekPunt() && aankomstPunt==value.getBestemming()) {
+				vertrekTijd.getItems().add(dateFormatter(value.getVertrekTijd()));
+			}
+		}
 	}
-
+	public void vertrekTijdSelected() {
+		vertrekTijdString=vertrekTijd.getValue();
+		for(Map.Entry<Integer,Vlucht> entry : Vlucht.geefAlle().entrySet()) {
+			Integer key = entry.getKey();
+			Vlucht value = entry.getValue();
+			if(vertrekPunt==value.getVertrekPunt() && aankomstPunt==value.getBestemming() && vertrekTijdString.equals(dateFormatter(value.getVertrekTijd()))) {
+				boeking.setVlucht(value);
+				toonMelding("beschikbare plaatsen:"+boeking.getVlucht().getBeschikbarePlaatsen());
+			}
+		}
+	}
 	public void ok() {
 		try {
 			boeking.bewaar();
