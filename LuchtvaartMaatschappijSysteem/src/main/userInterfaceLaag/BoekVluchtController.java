@@ -61,9 +61,11 @@ public class BoekVluchtController<Treemap> implements Initializable {
 		}
 
 	}
+
 	public void bestemming() {
 		System.out.println(aankomstVliegveld.getValue());
 	}
+
 	public void ok() {
 		try {
 			boeking.bewaar();
