@@ -5,14 +5,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
-import main.domeinLaag.Land;
+import main.domeinLaag.Boeking;
 import main.domeinLaag.Luchthaven;
 
 import java.net.URL;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class BoekVluchtController implements Initializable {
 
@@ -34,8 +31,11 @@ public class BoekVluchtController implements Initializable {
 	@FXML
 	private Spinner stoelen;
 
+	private Boeking boeking;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		boeking=new Boeking();
 		vertrekVliegveld.getItems().setAll(Luchthaven.geefAlle().keySet());
 	}
+
 }
