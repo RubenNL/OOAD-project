@@ -1,19 +1,13 @@
 package test;
 
-import main.domeinLaag.Fabrikant;
-import main.domeinLaag.Land;
-import main.domeinLaag.Luchthaven;
-import main.domeinLaag.LuchtvaartMaatschappij;
-import main.domeinLaag.Vliegtuig;
-import main.domeinLaag.VliegtuigType;
-import main.domeinLaag.Vlucht;
+import main.domeinLaag.*;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VluchtTest {
 
@@ -79,25 +73,69 @@ public class VluchtTest {
 	public void testBestemmingMagNietGelijkZijnAanVertrek_True() {
 		Vlucht vlucht = new Vlucht();
 		Luchthaven bestemming;
-		try {
-			vlucht.zetVliegtuig(vt1);
-			vlucht.zetVertrekpunt(lh2);
-			bestemming = vlucht.getBestemming();
-			assertTrue(bestemming == null);
-			vlucht.zetBestemming(lh1);
-			bestemming = vlucht.getBestemming();
-			assertTrue(bestemming.equals(lh1));
-		}
-		catch(IllegalArgumentException e) {
-			bestemming = vlucht.getBestemming();
-			assertTrue(bestemming.equals(lh1));
-		}
+		vlucht.zetVliegtuig(vt1);
+		vlucht.zetVertrekpunt(lh2);
+		bestemming = vlucht.getBestemming();
+		assertTrue(bestemming == null);
+		vlucht.zetBestemming(lh1);
+		bestemming = vlucht.getBestemming();
+		assertTrue(bestemming.equals(lh1));
+//		try {
+//			vlucht.zetVliegtuig(vt1);
+//			vlucht.zetVertrekpunt(lh2);
+//			bestemming = vlucht.getBestemming();
+//			assertTrue(bestemming == null);
+//			vlucht.zetBestemming(lh1);
+//			bestemming = vlucht.getBestemming();
+//			assertTrue(bestemming.equals(lh1));
+//		}
+//		catch(NullPointerException e) {
+//			bestemming = vlucht.getBestemming();
+//			assertFalse(bestemming.equals(lh1));
+//		}
 	}
 
 	/**
 	 * Business rule:
 	 * xxx
 	 */
-	
+	@Test
+	public void testVertrekpuntMagNietGelijkZijnAanNull() {
+		Vlucht vlucht = new Vlucht();
+		Luchthaven vertrek;
+		Calendar vertrektijd = Calendar.getInstance();
+		Calendar aankomsttijd=Calendar.getInstance();
+		aankomsttijd.add(Calendar.MINUTE,1);
+		try {
+			vlucht.zetVliegtuig(vt1);
+			vlucht.zetVertrekpunt(null);
+			vlucht.zetBestemming(lh1);
+			vlucht.bewaar();
+			vertrek = vlucht.getVertrekPunt();
+			assertNotEquals(null, vertrek, "Vertrekpunt Ongeldig");
+		} catch(VluchtException e) {
+			assertEquals("Geen geldig vertrekpunt", e.getMessage());
+		}
+
+
+	}
+
+	@Test
+	public void testBestemmingpuntMagNietGelijkZijnAanNull() {
+		Vlucht vlucht = new Vlucht();
+		Luchthaven bestemming;
+		Calendar vertrektijd = Calendar.getInstance();
+		Calendar aankomsttijd = Calendar.getInstance();
+		aankomsttijd.add(Calendar.MINUTE,1);
+		try {
+			vlucht.zetVliegtuig(vt1);
+			vlucht.zetVertrekpunt(lh2);
+			vlucht.zetBestemming(null);
+			vlucht.bewaar();
+			bestemming = vlucht.getBestemming();
+			assertNotEquals(null, bestemming, "Vertrekpunt Ongeldig");
+		} catch(VluchtException e) {
+			assertEquals("Geen geldig bestemming", e.getMessage());
+		}
 		
 }
