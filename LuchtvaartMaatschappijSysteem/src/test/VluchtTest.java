@@ -28,7 +28,7 @@ public class VluchtTest {
 			datum.set(2000, 01, 01);
 			vt1 = new Vliegtuig(lvm, vtt1, "Luchtbus 100", datum);
 			Land l1 = new Land("Nederland", 31);
-			Land l2 = new Land("België", 32);
+			Land l2 = new Land("BelgiÃ«", 32);
 			lh1 = new Luchthaven("Schiphol", "ASD", true, l1);
 			lh2 = new Luchthaven("Tegel", "TEG", true, l2);
 			Calendar vertr = Calendar.getInstance();
@@ -202,7 +202,6 @@ public class VluchtTest {
 		}
 	}
 
-
 	@Test
 	public void testenBewarenHappyFlow() {
 		Vlucht vlucht = new Vlucht();
@@ -233,13 +232,30 @@ public class VluchtTest {
 		}
 	}
 
+	@Test
+	public void test9_Vertrektijd_voor_Begintijd() {
+		Vlucht vlucht=new Vlucht();
+		Calendar vertrektijd=Calendar.getInstance();
+		assertDoesNotThrow(() -> vlucht.zetVertrekTijd(vertrektijd),
+				"Zou geen foutmelding bij invullen vertrektijd");
+		Calendar aankomsttijd=Calendar.getInstance();
+		aankomsttijd.add(Calendar.MINUTE,-1);
+		VluchtException exception=assertThrows(
+			VluchtException.class,
+			() -> vlucht.zetAankomstTijd(aankomsttijd),
+			"Geen foutmelding bij aankomsttijd voor vertrektijd"
+		);
+		assertEquals(exception.getMessage(),"Aankomsttijd voor vertrektijd","Foutmelding klopt niet");
+	}
 
-
-
-
-
-
-
-
-
+	@Test
+	public void test8_10_aankomstTijd_1_minuut_Na_VertrekTijd() {
+		Vlucht vlucht=new Vlucht();
+		Calendar vertrektijd=Calendar.getInstance();
+		assertDoesNotThrow(() -> vlucht.zetVertrekTijd(vertrektijd),"Zou geen foutmelding bij invullen vertrektijd");
+		Calendar aankomsttijd=Calendar.getInstance();
+		aankomsttijd.add(Calendar.MINUTE,+1);
+		assertDoesNotThrow(() -> vlucht.zetAankomstTijd(aankomsttijd),"Geen foutmelding bij aankomsttijd 1 minuut na vertrektijd"
+		);
+	}
 }
