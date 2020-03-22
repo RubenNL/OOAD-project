@@ -75,13 +75,39 @@ public class VluchtTest {
 
 
 
+// Test 7
+	@Test
+	public void testTijdInHetVerledenMagNiet() {
+		Vlucht vlucht = new Vlucht();
+		Calendar vertrektijd = Calendar.getInstance();
+		vertrektijd.add(Calendar.MINUTE, -1);
+
+		try {
+			vlucht.zetVliegtuig(vt1);
+			vlucht.zetVertrekpunt(lh2);
+			vlucht.zetBestemming(lh1);
+
+			vlucht.zetVertrekTijd(vertrektijd);
+
+			vlucht.bewaar();
+
+			Calendar tijd = vlucht.getVertrekTijd();
+
+			assertNotEquals(vertrektijd, tijd, "geen geldige datum/tijd");
+		} catch (VluchtException e) {
+			assertEquals("Geen geldige aankomsttijd.", e.getMessage());
+		}
+
+
+	}
+
+
 
 //	Van 15 t/m 20
 
 	@Test
 	public void testVliegtuigMagNietGelijkAanNull() {
 		Vlucht vlucht = new Vlucht();
-		Luchthaven vertrek;
 		Calendar vertrektijd = Calendar.getInstance();
 		Calendar aankomsttijd = Calendar.getInstance();
 		aankomsttijd.add(Calendar.MINUTE, 1);
