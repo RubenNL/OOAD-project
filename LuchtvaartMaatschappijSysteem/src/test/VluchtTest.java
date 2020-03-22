@@ -5,6 +5,7 @@ import main.domeinLaag.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -256,6 +257,19 @@ public class VluchtTest {
 		} catch (Exception e) {
 			e.getMessage();
 		}
+	}
+
+	@Test
+	public void testOngeldigeDatum(){
+		Vlucht vlucht = new Vlucht();
+		Calendar vertrektijd = Calendar.getInstance();
+		vertrektijd.set(2025, 9, 32, 14, 15, 0);
+
+		assertThrows(
+				VluchtException.class,
+				() -> vlucht.zetVertrekTijd(vertrektijd),
+				"Geen foutmelding bij ongeldige datum"
+		);
 	}
 
 	@Test
