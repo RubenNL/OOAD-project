@@ -101,4 +101,14 @@ public class VluchtTest {
 			"Geen foutmelding bij aankomsttijd voor vertrektijd"
 		);
 	}
+	@Test
+	public void test8_10_aankomstTijd_1_minuut_Na_VertrekTijd() {
+		Vlucht vlucht=new Vlucht();
+		Calendar vertrektijd=Calendar.getInstance();
+		assertDoesNotThrow(() -> vlucht.zetVertrekTijd(vertrektijd),"Zou geen foutmelding bij invullen vertrektijd");
+		Calendar aankomsttijd=Calendar.getInstance();
+		aankomsttijd.add(Calendar.MINUTE,+1);
+		assertDoesNotThrow(() -> vlucht.zetAankomstTijd(aankomsttijd),"Geen foutmelding bij aankomsttijd 1 minuut na vertrektijd"
+		);
+	}
 }
