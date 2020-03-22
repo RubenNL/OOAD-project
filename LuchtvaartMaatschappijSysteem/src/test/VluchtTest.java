@@ -69,32 +69,6 @@ public class VluchtTest {
 		}
 	}
 
-	@Test
-	public void testBestemmingMagNietGelijkZijnAanVertrek_True() {
-		Vlucht vlucht = new Vlucht();
-		Luchthaven bestemming;
-		vlucht.zetVliegtuig(vt1);
-		vlucht.zetVertrekpunt(lh2);
-		bestemming = vlucht.getBestemming();
-		assertTrue(bestemming == null);
-		vlucht.zetBestemming(lh1);
-		bestemming = vlucht.getBestemming();
-		assertTrue(bestemming.equals(lh1));
-//		try {
-//			vlucht.zetVliegtuig(vt1);
-//			vlucht.zetVertrekpunt(lh2);
-//			bestemming = vlucht.getBestemming();
-//			assertTrue(bestemming == null);
-//			vlucht.zetBestemming(lh1);
-//			bestemming = vlucht.getBestemming();
-//			assertTrue(bestemming.equals(lh1));
-//		}
-//		catch(NullPointerException e) {
-//			bestemming = vlucht.getBestemming();
-//			assertFalse(bestemming.equals(lh1));
-//		}
-	}
-
 	/**
 	 * Business rule:
 	 * xxx
@@ -114,7 +88,7 @@ public class VluchtTest {
 			vertrek = vlucht.getVertrekPunt();
 			assertNotEquals(null, vertrek, "Vertrekpunt Ongeldig");
 		} catch(VluchtException e) {
-			assertEquals("Geen geldig vertrekpunt", e.getMessage());
+			assertEquals("Geen geldig vertrekpunt.", e.getMessage());
 		}
 
 
@@ -126,16 +100,16 @@ public class VluchtTest {
 		Luchthaven bestemming;
 		Calendar vertrektijd = Calendar.getInstance();
 		Calendar aankomsttijd = Calendar.getInstance();
-		aankomsttijd.add(Calendar.MINUTE,1);
+		aankomsttijd.add(Calendar.MINUTE, 1);
 		try {
 			vlucht.zetVliegtuig(vt1);
 			vlucht.zetVertrekpunt(lh2);
 			vlucht.zetBestemming(null);
 			vlucht.bewaar();
 			bestemming = vlucht.getBestemming();
-			assertNotEquals(null, bestemming, "Vertrekpunt Ongeldig");
-		} catch(VluchtException e) {
-			assertEquals("Geen geldig bestemming", e.getMessage());
+			assertNotEquals(null, bestemming, "Bestemming Ongeldig");
+		} catch (VluchtException e) {
+			assertEquals("Geen geldige bestemming.", e.getMessage());
 		}
-		
+	}
 }
