@@ -95,12 +95,14 @@ public class VluchtTest {
 				"Zou geen foutmelding bij invullen vertrektijd");
 		Calendar aankomsttijd=Calendar.getInstance();
 		aankomsttijd.add(Calendar.MINUTE,-1);
-		assertThrows(
+		VluchtException exception=assertThrows(
 			VluchtException.class,
 			() -> vlucht.zetAankomstTijd(aankomsttijd),
 			"Geen foutmelding bij aankomsttijd voor vertrektijd"
 		);
+		assertEquals(exception.getMessage(),"Aankomsttijd voor vertrektijd","Foutmelding klopt niet");
 	}
+
 	@Test
 	public void test8_10_aankomstTijd_1_minuut_Na_VertrekTijd() {
 		Vlucht vlucht=new Vlucht();
