@@ -1,13 +1,12 @@
 package test;
 
 import main.domeinLaag.*;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VluchtTest {
 
@@ -89,27 +88,17 @@ public class VluchtTest {
 	}
 
 	@Test
-	public void test8_9_10_Vertrektijd_voor_Begintijd() {
+	public void test9_Vertrektijd_voor_Begintijd() {
 		Vlucht vlucht=new Vlucht();
 		Calendar vertrektijd=Calendar.getInstance();
-		try {
-			vlucht.zetVertrekTijd(vertrektijd);
-		} catch (VluchtException e) {
-			assertTrue(1==2,"vertrektijd zou ingevuld moeten zijn.");
-		}
+		assertDoesNotThrow(() -> vlucht.zetVertrekTijd(vertrektijd),
+				"Zou geen foutmelding bij invullen vertrektijd");
 		Calendar aankomsttijd=Calendar.getInstance();
 		aankomsttijd.add(Calendar.MINUTE,-1);
-		try {
-			vlucht.zetAankomstTijd(aankomsttijd);
-			assertTrue(1==2,"dit zou een foutmelding moeten geven");
-		} catch (VluchtException e) {
-			assertTrue(vlucht.getAankomstTijd()==null,"aankomstTijd bestaat niet:");
-		}
-		aankomsttijd.add(Calendar.MINUTE,2);
-		try {
-			vlucht.zetAankomstTijd(aankomsttijd);
-		} catch (VluchtException e) {
-			assertTrue(1==2,"geeft onnodige foutmelding bij aankomst=vertrek+1minute");
-		}
+		assertThrows(
+			VluchtException.class,
+			() -> vlucht.zetAankomstTijd(aankomsttijd),
+			"Geen foutmelding bij aankomsttijd voor vertrektijd"
+		);
 	}
 }
