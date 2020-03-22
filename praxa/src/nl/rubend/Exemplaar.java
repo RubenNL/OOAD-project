@@ -22,4 +22,5 @@ public class Exemplaar {
 	public Boolean isVerhuurd() {
 		return verhuurd;
 	}
+
 }
