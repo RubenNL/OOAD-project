@@ -1,12 +1,6 @@
 package test;
 
-import main.domeinLaag.Fabrikant;
-import main.domeinLaag.Land;
-import main.domeinLaag.Luchthaven;
-import main.domeinLaag.LuchtvaartMaatschappij;
-import main.domeinLaag.Vliegtuig;
-import main.domeinLaag.VliegtuigType;
-import main.domeinLaag.Vlucht;
+import main.domeinLaag.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -94,10 +88,28 @@ public class VluchtTest {
 		}
 	}
 
-	/**
-	 * Business rule:
-	 * xxx
-	 */
-	
-		
+	@Test
+	public void test8_9_10_Vertrektijd_voor_Begintijd() {
+		Vlucht vlucht=new Vlucht();
+		Calendar vertrektijd=Calendar.getInstance();
+		try {
+			vlucht.zetVertrekTijd(vertrektijd);
+		} catch (VluchtException e) {
+			assertTrue(1==2,"vertrektijd zou ingevuld moeten zijn.");
+		}
+		Calendar aankomsttijd=Calendar.getInstance();
+		aankomsttijd.add(Calendar.MINUTE,-1);
+		try {
+			vlucht.zetAankomstTijd(aankomsttijd);
+			assertTrue(1==2,"dit zou een foutmelding moeten geven");
+		} catch (VluchtException e) {
+			assertTrue(vlucht.getAankomstTijd()==null,"aankomstTijd bestaat niet:");
+		}
+		aankomsttijd.add(Calendar.MINUTE,2);
+		try {
+			vlucht.zetAankomstTijd(aankomsttijd);
+		} catch (VluchtException e) {
+			assertTrue(1==2,"geeft onnodige foutmelding bij aankomst=vertrek+1minute");
+		}
+	}
 }
