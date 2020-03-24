@@ -36,8 +36,6 @@ public class VerhuurProduct extends Product {
 		return beschikbaar;
 	}
 
-	// 	Moet getest worden
-	//	Mist exemplaren vergelijken
 	public boolean equals(Object other) {
 		boolean gelijkeObjecten = false;
 		if (other instanceof VerhuurProduct) {

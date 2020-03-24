@@ -9,15 +9,12 @@ public class Transactie {
 	private Date datum;
 	private String tijd;
 	private String plaats;
-//	private double totaal;                     // een afgeleide attribuut
 	private double btwTotaal;
 	private String transactieType;
 
 
 	// een arraylist van alle betrokken regels
 	private ArrayList<TransactieRegel> regels = new ArrayList<TransactieRegel>();
-
-//	de constructor moet waarschijnlijk nog aangepast wordern
 	public Transactie(int trNr, String transactieType, Date datum, String tijd, String plaats) {
 		this.transactienr = trNr;
 		this.tijd=tijd;
@@ -29,7 +26,6 @@ public class Transactie {
 		this.datum=datum;
 		this.plaats=plaats;
 	}
-	// de realisatie van de compositie relatie
 	public void addTransactieRegel(int aantal, Product product) {
 		regels.add( new TransactieRegel(aantal, product));
 	}
@@ -50,12 +46,5 @@ public class Transactie {
 	public String geefTijd() {
 		return this.tijd;
 	}
-
-//	Dit is een echter een aggregatie relatie en geen compositie, check  link hieronder voor een gedetailleerde uitleg:
-//	https://www.reddit.com/r/javahelp/comments/5vrc69/need_help_understanding_aggregation_versus/
-//	public void voegRegelToe(TransactieRegel regel) {
-//		regels.add(regel);
-//	}
-
 
 }

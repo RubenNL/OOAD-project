@@ -6,8 +6,6 @@ import java.util.Date;
 public class VerhuurTransactie extends Transactie {
 	private double borgTotaal;
 	private ArrayList<VerhuurRegel> verhuurRegels=new ArrayList<VerhuurRegel>();
-//	een afgeleide attribuut
-//	private double afrekenTotaal;
 
 	public VerhuurTransactie(int trNr, double brgTt, Date datum, String tijd, String plaats) {
 		super("verhuur", datum, tijd, plaats);
