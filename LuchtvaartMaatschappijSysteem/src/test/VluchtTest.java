@@ -2,6 +2,7 @@ package test;
 
 import main.domeinLaag.*;
 
+import main.userInterfaceLaag.Main;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,8 @@ public class VluchtTest {
 	@BeforeEach
 	public void initialize() {
 		try {
-			lvm = new LuchtvaartMaatschappij("NLM");
+			new Main().initializeDomainObjects();
+			lvm=LuchtvaartMaatschappij.getCurrentLuchtvaartMaatschappij();
 			f1 = new Fabrikant("Airbus", "G. Dejenelle");
 			vtt1 = f1.creeervliegtuigtype("A-200", 140);
 			Calendar datum = Calendar.getInstance();
@@ -350,7 +352,68 @@ public class VluchtTest {
 		assertDoesNotThrow(() -> vlucht.zetVertrekTijd(vertrektijd),"Zou geen foutmelding bij invullen vertrektijd");
 		Calendar aankomsttijd=Calendar.getInstance();
 		aankomsttijd.add(Calendar.MINUTE,+1);
-		assertDoesNotThrow(() -> vlucht.zetAankomstTijd(aankomsttijd),"Geen foutmelding bij aankomsttijd 1 minuut na vertrektijd"
+		assertDoesNotThrow(() -> vlucht.zetAankomstTijd(aankomsttijd),"Geen foutmelding bij aankomsttijd 1 minuut na vertrektijd");
+	}
+
+	@Test
+	public void test11_zelfde_vertrektijd_als_andere_aankomsttijd() {
+		Vlucht vlucht=new Vlucht();
+		vlucht.zetVliegtuig(lvm.geefVliegtuigen().get("Fokke"));
+		Calendar vertrektijd=Calendar.getInstance();
+		vertrektijd.set(2025,Calendar.JULY,1,15,36);
+		VluchtException exception=assertThrows(
+			VluchtException.class,
+			() -> vlucht.zetVertrekTijd(vertrektijd),
+			"Geen melding bij dubbelgeboekt vliegtuig."
 		);
+		assertTrue(exception.getMessage().contains("Vliegtuig reeds bezet op"),"Foutmelding klopt niet");
+	}
+	@Test
+	public void test12_aankomstTijd_in_andere_vlucht() {
+		Vlucht vlucht=new Vlucht();
+		vlucht.zetVliegtuig(lvm.geefVliegtuigen().get("Fokke"));
+		Calendar vertrektijd=Calendar.getInstance();
+		vertrektijd.set(2025,Calendar.JULY,1,11,36);
+		assertDoesNotThrow(() -> vlucht.zetVertrekTijd(vertrektijd),"geeft een foutmelding bij aankomsttijd ruim voor vertrektijd nieuwe vlucht");
+		Calendar aankomstTijd=Calendar.getInstance();
+		aankomstTijd.set(2025,Calendar.JULY,1,12,43);
+		VluchtException exception=assertThrows(
+				VluchtException.class,
+				() -> vlucht.zetAankomstTijd(aankomstTijd),
+				"Geen melding bij dubbelgeboekt vliegtuig."
+		);
+		assertTrue(exception.getMessage().contains("Vliegtuig reeds bezet op"),"Foutmelding klopt niet");
+	}
+	@Test
+	public void test13_alles_dubbel() {
+		Vlucht vlucht=new Vlucht();
+		vlucht.zetVliegtuig(lvm.geefVliegtuigen().get("Fokke"));
+		Calendar vertrektijd=Calendar.getInstance();
+		vertrektijd.set(2025,Calendar.JULY,1,12,42);
+		VluchtException exception=assertThrows(
+				VluchtException.class,
+				() -> vlucht.zetVertrekTijd(vertrektijd),
+				"Geen melding bij dubbelgeboekt vliegtuig."
+		);
+		assertTrue(exception.getMessage().contains("Vliegtuig reeds bezet op"),"Foutmelding klopt niet");
+		Calendar aankomstTijd=Calendar.getInstance();
+		aankomstTijd.set(2025,Calendar.JULY,1,15,37);
+		VluchtException exception2=assertThrows(
+				VluchtException.class,
+				() -> vlucht.zetAankomstTijd(aankomstTijd),
+				"Geen melding bij dubbelgeboekt vliegtuig."
+		);
+		assertTrue(exception2.getMessage().contains("Vliegtuig reeds bezet op"),"Foutmelding klopt niet");
+	}
+	@Test
+	public void test14_geen_dubbele_vlucht() {
+		Vlucht vlucht=new Vlucht();
+		vlucht.zetVliegtuig(lvm.geefVliegtuigen().get("Fokke"));
+		Calendar vertrektijd=Calendar.getInstance();
+		vertrektijd.set(2025,Calendar.JULY,1,15,37);
+		assertDoesNotThrow(() -> vlucht.zetVertrekTijd(vertrektijd),"geeft een foutmelding waar dat niet nodig is.");
+		Calendar aankomstTijd=Calendar.getInstance();
+		aankomstTijd.set(2025,Calendar.JULY,1,16,37);
+		assertDoesNotThrow(() -> vlucht.zetAankomstTijd(aankomstTijd),"geeft een foutmelding waar dat niet nodig is.");
 	}
 }

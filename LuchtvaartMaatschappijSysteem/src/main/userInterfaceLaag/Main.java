@@ -31,7 +31,7 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	private void initializeDomainObjects() {
+	public void initializeDomainObjects() {
     LuchtvaartMaatschappij lvm = new LuchtvaartMaatschappij("NLM");
     LuchtvaartMaatschappij.setCurrentLuchtvaartMaatschappij(lvm);
 	Fabrikant f1 = new Fabrikant("Airbus","G. Dejenelle");
