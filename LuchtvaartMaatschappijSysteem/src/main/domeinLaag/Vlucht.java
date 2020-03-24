@@ -28,16 +28,12 @@ public class Vlucht {
 	 * @return True, als vliegtuig bezet. Anders false.
 	 */
 	private static boolean isBezet(Vliegtuig vliegtuig, Calendar d) {
-
-		boolean b = false;
-		for (Iterator<Vlucht> i = alleVluchten.iterator(); i.hasNext(); ) {
-			Vlucht v = (Vlucht) i.next();
-			if (v.vliegtuig.equals(vliegtuig)) {
-				if (v.getVertrekTijd().before(d) && v.getAankomstTijd().after(d))
-					b = true;
+		for(Vlucht vlucht:alleVluchten) {
+			if(vlucht.getVliegtuig().equals(vliegtuig)) {
+				if(vlucht.getVertrekTijd().before(d) && vlucht.getAankomstTijd().before(d)) return true;
 			}
 		}
-		return b;
+		return false;
 	}
 
 
