@@ -76,6 +76,56 @@ public class VluchtTest {
 	 */
 
 	@Test
+	// Test 3
+	public void testOngeldigeVertrekDatum() {
+		Vlucht vlucht = new Vlucht();
+		Calendar vertrektijd = Calendar.getInstance();
+		vertrektijd.set(2025, 8, 31, 24, 00, 0);
+
+		assertThrows(
+				VluchtException.class,
+				() -> vlucht.zetVertrekTijd(vertrektijd),
+				"Geen foutmelding bij ongeldige datum/tijd"
+		);
+	}
+
+	@Test
+	// Test 4
+	public void testOngeldigeAankomstTijd(){
+		Vlucht vlucht = new Vlucht();
+		Calendar aankomsttijd = Calendar.getInstance();
+		aankomsttijd.set(2025, 8, 31, 24, 01, 0);
+
+		assertThrows(
+				VluchtException.class,
+				() -> vlucht.zetAankomstTijd(aankomsttijd),
+				"Geen foutmelding bij ongeldige datum/tijd"
+		);
+	}
+
+	@Test
+	// Test 5
+	public void testGeldigeVertrektijdEnAankomstTijd(){
+		Vlucht vlucht = new Vlucht();
+
+		Calendar vertrektijd = Calendar.getInstance();
+		vertrektijd.set(2025, 8, 12, 12, 00, 0);
+
+		assertDoesNotThrow(
+				() -> vlucht.zetVertrekTijd(vertrektijd),
+				"Zou geen foutmelding moeten geven bij geldige datum"
+		);
+
+		Calendar aankomsttijd = Calendar.getInstance();
+		aankomsttijd.set(2025, 8, 12, 12, 01, 0);
+
+		assertDoesNotThrow(
+				() -> vlucht.zetAankomstTijd(aankomsttijd),
+				"Zou geen foutmelding moeten geven bij geldige datum"
+		);
+	}
+
+	@Test
 	public void test7_VertrekTijdInHetVerledenMagNiet() {
 		Vlucht vlucht = new Vlucht();
 		Calendar vertrektijd = Calendar.getInstance();
