@@ -29,7 +29,7 @@
       <Label text="Vertrek" GridPane.rowIndex="2" />
       <ComboBox fx:id="vertrekTijd" maxWidth="1.7976931348623157E308" onAction="#vertrekTijdSelected" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label text="Aantal stoelen" GridPane.rowIndex="3" />
-      <Spinner fx:id="stoelen" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Spinner fx:id="stoelen" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="94.0" text="Annuleren" GridPane.rowIndex="4" />
       <Button fx:id="buttonOK" mnemonicParsing="false" onAction="#ok" prefHeight="35.0" prefWidth="94.0" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>

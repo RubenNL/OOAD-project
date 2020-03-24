@@ -29,6 +29,8 @@ public class BoekVluchtController<Treemap> implements Initializable {
 	@FXML
 	private Button buttonOK;
 	@FXML
+	private Integer max;
+	@FXML
 	private Button buttonCancel;
 	private Boeking boeking;
 	private Luchthaven vertrekPunt;
@@ -74,13 +76,16 @@ public class BoekVluchtController<Treemap> implements Initializable {
 			Vlucht value = entry.getValue();
 			if(vertrekPunt==value.getVertrekPunt() && aankomstPunt==value.getBestemming() && vertrekTijdString.equals(dateFormatter(value.getVertrekTijd()))) {
 				boeking.setVlucht(value);
-				toonMelding("beschikbare plaatsen:"+boeking.getVlucht().getBeschikbarePlaatsen());
+				SpinnerValueFactory factory=new SpinnerValueFactory.IntegerSpinnerValueFactory(1,boeking.getVlucht().getBeschikbarePlaatsen(),1);
+				stoelen.setValueFactory(factory);
 			}
 		}
 	}
 	public void ok() {
+		boeking.setStoelen((Integer)stoelen.getValue());
 		try {
 			boeking.bewaar();
+			toonMelding("Boeking opgeslagen, Dit waren de gegevens:\nstoelen:"+boeking.getStoelen()+"\nvliegtuig:"+boeking.getVlucht().getVliegtuig().geefNaam()+"\nvertrekTijd:"+(new SimpleDateFormat("yyyy-mm-dd hh:mm")).format(boeking.getVlucht().getVertrekTijd().getTime())+"\nvertrek:"+boeking.getVlucht().getVertrekPunt().geefNaam()+"\naankomst:"+boeking.getVlucht().getBestemming().geefNaam());
 			Stage stage = (Stage) buttonOK.getScene().getWindow();
 			stage.close();
 		} catch (IllegalStateException ei) {
@@ -103,4 +108,5 @@ public class BoekVluchtController<Treemap> implements Initializable {
 		alert.setContentText(tekstMessage);
 		alert.showAndWait();
 	}
+
 }
