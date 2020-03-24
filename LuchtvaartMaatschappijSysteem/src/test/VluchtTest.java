@@ -76,7 +76,6 @@ public class VluchtTest {
 	 */
 
 	@Test
-	// Test 3
 	public void test3_OngeldigeVertrekDatum() {
 		Vlucht vlucht = new Vlucht();
 		Calendar vertrektijd = Calendar.getInstance();
@@ -90,7 +89,6 @@ public class VluchtTest {
 	}
 
 	@Test
-	// Test 4
 	public void test4_OngeldigeAankomstTijd(){
 		Vlucht vlucht = new Vlucht();
 		Calendar aankomsttijd = Calendar.getInstance();
@@ -104,7 +102,6 @@ public class VluchtTest {
 	}
 
 	@Test
-	// Test 5
 	public void test5_GeldigeVertrektijdEnAankomstTijd(){
 		Vlucht vlucht = new Vlucht();
 
