@@ -77,7 +77,7 @@ public class VluchtTest {
 
 // Test 7
 	@Test
-	public void testTijdInHetVerledenMagNiet() {
+	public void testVertrekTijdInHetVerledenMagNiet() {
 		Vlucht vlucht = new Vlucht();
 		Calendar vertrektijd = Calendar.getInstance();
 		vertrektijd.add(Calendar.MINUTE, -1);
@@ -91,15 +91,84 @@ public class VluchtTest {
 
 			vlucht.bewaar();
 
-			Calendar tijd = vlucht.getVertrekTijd();
+			Calendar tijdVlucht = vlucht.getVertrekTijd();
 
-			assertNotEquals(vertrektijd, tijd, "geen geldige datum/tijd");
+			assertEquals(null, tijdVlucht, "Geen geldige vertrekTijd");
+
 		} catch (VluchtException e) {
 			assertEquals("Geen geldige aankomsttijd.", e.getMessage());
 		}
 
 
 	}
+
+
+	// Test 8
+	@Test
+	public void testTijdInHetVerledenMagNiet() {
+		Vlucht vlucht = new Vlucht();
+		Calendar vertrektijd = Calendar.getInstance();
+		vertrektijd.add(Calendar.MINUTE, -2);
+		Calendar aankomst = Calendar.getInstance();
+		aankomst.add(Calendar.MINUTE, -1);
+
+		try {
+			vlucht.zetVliegtuig(vt1);
+			vlucht.zetVertrekpunt(lh2);
+			vlucht.zetBestemming(lh1);
+
+			vlucht.zetVertrekTijd(vertrektijd);
+			vlucht.zetAankomstTijd(aankomst);
+
+			vlucht.bewaar();
+
+			Calendar vTijd = vlucht.getVertrekTijd();
+			Calendar aTijd = vlucht.getAankomstTijd();
+
+			assertEquals(null, vTijd, "Geen geldige vertrekTijd");
+			assertEquals(null, aTijd, "Geen geldige aankomstTijd");
+
+
+		} catch (VluchtException e) {
+			assertEquals("tijd in het verleden.", e.getMessage());
+			assertEquals("tijd in het verleden.", e.getMessage());
+
+		}
+	}
+
+
+
+	// Test 9
+	@Test
+	public void testTijdzettenHappyFlow() {
+		Vlucht vlucht = new Vlucht();
+		Calendar vertrektijd = Calendar.getInstance();
+		Calendar aankomstTijd = Calendar.getInstance();
+		aankomstTijd.add(Calendar.MINUTE, 1);
+
+		try {
+			vlucht.zetVliegtuig(vt1);
+			vlucht.zetVertrekpunt(lh2);
+			vlucht.zetBestemming(lh1);
+
+			vlucht.zetVertrekTijd(vertrektijd);
+			vlucht.zetAankomstTijd(aankomstTijd);
+
+			vlucht.bewaar();
+
+			Calendar vTijd = vlucht.getVertrekTijd();
+			Calendar aTijd = vlucht.getAankomstTijd();
+
+			assertEquals(vertrektijd, vTijd);
+			assertEquals(aankomstTijd, aTijd);
+
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+
+
 
 
 
