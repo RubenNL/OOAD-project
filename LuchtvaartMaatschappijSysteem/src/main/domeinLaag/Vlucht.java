@@ -1,68 +1,72 @@
 package main.domeinLaag;
+
 import java.util.*;
 
-public class Vlucht 
-{
-   private static HashSet<Vlucht> alleVluchten = new HashSet<Vlucht>();
-   private static int hoogsteVluchtNummer = 1;
-   private int vluchtNummer;
-   private Vliegtuig vliegtuig;
-   private Luchthaven bestemming;
-   private Luchthaven vertrekpunt;
-   private Calendar vertrekTijd;
-   private Calendar aankomstTijd;
-   private Calendar duur;
-   private HashSet<Boeking> boekingen= new HashSet<Boeking>();
+public class Vlucht {
+	private static HashSet<Vlucht> alleVluchten = new HashSet<Vlucht>();
+	private static int hoogsteVluchtNummer = 1;
+	private int vluchtNummer;
+	private Vliegtuig vliegtuig;
+	private Luchthaven bestemming;
+	private Luchthaven vertrekpunt;
+	private Calendar vertrekTijd;
+	private Calendar aankomstTijd;
+	private Calendar duur;
+	private HashSet<Boeking> boekingen = new HashSet<Boeking>();
 
-   public static TreeMap<Integer, Vlucht> geefAlle() {
-	   TreeMap<Integer, Vlucht> alleV = new TreeMap<Integer, Vlucht>();
-	   for (Vlucht v : alleVluchten) {
-		   alleV.put(v.vluchtNummer, v);
-	   }
-	   return alleV;
-   }
+	public static TreeMap<Integer, Vlucht> geefAlle() {
+		TreeMap<Integer, Vlucht> alleV = new TreeMap<Integer, Vlucht>();
+		for (Vlucht v : alleVluchten) {
+			alleV.put(v.vluchtNummer, v);
+		}
+		return alleV;
+	}
 
-   /** Controleert of het vliegtuig op het meegegeven tijdstip al een vlucht heeft.
-    * @return True, als vliegtuig bezet. Anders false. */
-   private static boolean isBezet(Vliegtuig vliegtuig, Calendar d) {
-	   boolean b = false;
-	   for (Iterator<Vlucht> i=alleVluchten.iterator(); i.hasNext();) {
-	   		Vlucht v = (Vlucht) i.next();
+	/**
+	 * Controleert of het vliegtuig op het meegegeven tijdstip al een vlucht heeft.
+	 *
+	 * @return True, als vliegtuig bezet. Anders false.
+	 */
+	private static boolean isBezet(Vliegtuig vliegtuig, Calendar d) {
+
+		boolean b = false;
+		for (Iterator<Vlucht> i = alleVluchten.iterator(); i.hasNext(); ) {
+			Vlucht v = (Vlucht) i.next();
 			if (v.vliegtuig.equals(vliegtuig)) {
-				if (v.getVertrekTijd().before(d) && v.getAankomstTijd().after(d) )
-				b = true;
+				if (v.getVertrekTijd().before(d) && v.getAankomstTijd().after(d))
+					b = true;
 			}
-	   }
-	   return b;
-   }
+		}
+		return b;
+	}
 
-   
-   public Vlucht() {
-	   zetVluchtNummer(); 
-   }
-   
-   public Vlucht(Vliegtuig vt, Luchthaven vertrekp, Luchthaven best, Calendar vertrek, Calendar aankomst) {
-	   zetVluchtNummer(); 
-	   this.vliegtuig = vt;
-	   this.vertrekpunt = vertrekp;
-	   this.bestemming = best;
-	   this.vertrekTijd = (Calendar)vertrek.clone();
-	   this.aankomstTijd = (Calendar) aankomst.clone();
-	   alleVluchten.add(this);
-   }
 
-   public void zetVliegtuig(Vliegtuig vt) {
-	   this.vliegtuig = vt;
-   }
+	public Vlucht() {
+		zetVluchtNummer();
+	}
+
+	public Vlucht(Vliegtuig vt, Luchthaven vertrekp, Luchthaven best, Calendar vertrek, Calendar aankomst) {
+		zetVluchtNummer();
+		this.vliegtuig = vt;
+		this.vertrekpunt = vertrekp;
+		this.bestemming = best;
+		this.vertrekTijd = (Calendar) vertrek.clone();
+		this.aankomstTijd = (Calendar) aankomst.clone();
+		alleVluchten.add(this);
+	}
+
+	public void zetVliegtuig(Vliegtuig vt) {
+		this.vliegtuig = vt;
+	}
 
 	public void zetVertrekpunt(Luchthaven vertrekpunt) {
 		this.vertrekpunt = vertrekpunt;
 	}
 
-   /**
-    * Controleer dat bestemming <> vertrekpunt.
-    */
-   public void zetBestemming(Luchthaven best) {
+	/**
+	 * Controleer dat bestemming <> vertrekpunt.
+	 */
+	public void zetBestemming(Luchthaven best) {
 		if (best == null) {
 			this.bestemming = best;
 		} else {
@@ -71,14 +75,15 @@ public class Vlucht
 			else
 				throw new IllegalArgumentException("bestemming en vertrek zijn gelijk");
 		}
-   }
-   
-   /**
-    * Controleer dat de vertrektijd niet overlapt met een andere vlucht van het toestel.
-    * @param tijd
-    */
-   public void zetVertrekTijd(Calendar tijd) throws VluchtException {
-   		if (tijd == null) {
+	}
+
+	/**
+	 * Controleer dat de vertrektijd niet overlapt met een andere vlucht van het toestel.
+	 *
+	 * @param tijd
+	 */
+	public void zetVertrekTijd(Calendar tijd) throws VluchtException {
+		if (tijd == null) {
 			vertrekTijd = null;
 		} else {
 			Calendar vTijd = tijd;
@@ -95,17 +100,17 @@ public class Vlucht
 			} else
 				throw new VluchtException("Vliegtuig reeds bezet op " + tijd.getTime());
 		}
-   }
-   
-   public Calendar getVertrekTijd() {
-   		return vertrekTijd;
-   }
-   
-   /**
-    * Controleer dat aankomstTijd > vertrekTijd.
-    */
-   public void zetAankomstTijd(Calendar tijd) throws VluchtException {
-   		if (tijd == null) {
+	}
+
+	public Calendar getVertrekTijd() {
+		return vertrekTijd;
+	}
+
+	/**
+	 * Controleer dat aankomstTijd > vertrekTijd.
+	 */
+	public void zetAankomstTijd(Calendar tijd) throws VluchtException {
+		if (tijd == null) {
 			aankomstTijd = null;
 		} else {
 			Calendar aTijd = tijd;
@@ -122,30 +127,31 @@ public class Vlucht
 			else
 				throw new VluchtException("Aankomsttijd voor vertrektijd");
 		}
-   }
-   
+	}
+
 	public Vliegtuig getVliegtuig() {
 		return vliegtuig;
 	}
+
 	public Calendar getAankomstTijd() {
-	   return aankomstTijd;
-	  }
-   
-   /**
-    * Controleer of alle gegevens gezet zijn. Zo ja, bewaar de vluchtgegevens.
-    */
-   public void bewaar() throws VluchtException {
-	   if(vliegtuig == null)
-		   throw new VluchtException("Geen geldige vliegtuig.");
-   		else if(bestemming == null)
-   			throw new VluchtException("Geen geldige bestemming.");
-		else if(aankomstTijd == null)
+		return aankomstTijd;
+	}
+
+	/**
+	 * Controleer of alle gegevens gezet zijn. Zo ja, bewaar de vluchtgegevens.
+	 */
+	public void bewaar() throws VluchtException {
+		if (vliegtuig == null)
+			throw new VluchtException("Geen geldige vliegtuig.");
+		else if (bestemming == null)
+			throw new VluchtException("Geen geldige bestemming.");
+		else if (aankomstTijd == null)
 			throw new VluchtException("Geen geldige aankomsttijd.");
-		else if(vertrekTijd == null)
-			throw new VluchtException("Geen geldige vertrektijd.");			
-   		else 
+		else if (vertrekTijd == null)
+			throw new VluchtException("Geen geldige vertrektijd.");
+		else
 			alleVluchten.add(this);
-   }
+	}
 
 	public Luchthaven getBestemming() {
 		return bestemming;
@@ -156,12 +162,11 @@ public class Vlucht
 	}
 
 
-	   
 	private void zetVluchtNummer() {
 		vluchtNummer = hoogsteVluchtNummer;
-		hoogsteVluchtNummer ++;
+		hoogsteVluchtNummer++;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Vlucht [vluchtNummer=" + vluchtNummer + ", vt=" + vliegtuig
@@ -169,15 +174,17 @@ public class Vlucht
 				+ ", vertrekTijd=" + vertrekTijd + ", aankomstTijd="
 				+ aankomstTijd + ", duur=" + duur + "]";
 	}
+
 	public Integer getBeschikbarePlaatsen() {
-   		Integer plaatsen=vliegtuig.geefCapaciteit();
-		for(Boeking boeking:boekingen) {
-			plaatsen-=boeking.getStoelen();
+		Integer plaatsen = vliegtuig.geefCapaciteit();
+		for (Boeking boeking : boekingen) {
+			plaatsen -= boeking.getStoelen();
 		}
 		return plaatsen;
 	}
+
 	public void addBoeking(Boeking boeking) {
 		this.boekingen.add(boeking);
 	}
-	
+
 }
