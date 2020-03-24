@@ -74,6 +74,24 @@ public class VluchtTest {
 	 * Business rule:
 	 * xxx
 	 */
+	@Test
+	public void test2_DatumsGelijkAanNullMogenGeenErrorsOpleveren() {
+		Vlucht vlucht = new Vlucht();
+
+		Calendar vertrektijd = null;
+		Calendar aankomstijd = null;
+		assertDoesNotThrow(
+				() -> vlucht.zetVertrekTijd(vertrektijd),
+				"Zou geen foutmelding moeten geven bij geldige datum"
+		);
+		assertDoesNotThrow(
+				() -> vlucht.zetAankomstTijd(aankomstijd),
+				"Zou geen foutmelding moeten geven bij geldige datum"
+		);
+
+
+	}
+
 
 	@Test
 	public void test3_OngeldigeVertrekDatum() {
@@ -144,8 +162,6 @@ public class VluchtTest {
 		} catch (VluchtException e) {
 			assertEquals("Geen geldige aankomsttijd.", e.getMessage());
 		}
-
-
 	}
 	@Test
 	public void test9_Vertrektijd_voor_Begintijd() {
