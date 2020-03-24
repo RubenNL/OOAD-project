@@ -136,6 +136,7 @@ public class VluchtTest {
 		);
 	}
 
+
 	@Test
 	public void test7_VertrekTijdInHetVerledenMagNiet() {
 		Vlucht vlucht = new Vlucht();
